@@ -1,0 +1,13 @@
+{
+  "domain": "wienergy",
+  "name": "WiEnergy",
+  "codeowners": ["@WiEnergy"],
+  "config_flow": true,
+  "dependencies": [],
+  "documentation": "https://github.com/WiEnergy/ha-wienergy",
+  "integration_type": "service",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/WiEnergy/ha-wienergy/issues",
+  "requirements": [],
+  "version": "0.1.0"
+}

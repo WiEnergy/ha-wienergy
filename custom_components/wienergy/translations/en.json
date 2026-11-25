@@ -1,0 +1,139 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "WiEnergy",
+        "description": "Surplus forecast of the WiEnergy energy communities. Leave the API key empty to use the public community signal. With a personal API key you additionally get your individual budget (recommendedMaxW).",
+        "data": {
+          "api_key": "API key (optional)"
+        },
+        "data_description": {
+          "api_key": "Only for participants with a personal key from WiEnergy."
+        }
+      },
+      "community": {
+        "title": "Choose community",
+        "data": {
+          "community_id": "Energy community"
+        }
+      },
+      "participant": {
+        "title": "Choose participant",
+        "data": {
+          "participant_id": "Participant"
+        }
+      },
+      "reauth_confirm": {
+        "title": "API key rejected",
+        "description": "Enter a new API key.",
+        "data": {
+          "api_key": "API key"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "Invalid API key",
+      "cannot_connect": "Cannot connect to the WiEnergy API",
+      "no_participants": "No participants are bound to this API key",
+      "wrong_participant": "This API key belongs to a different participant"
+    },
+    "abort": {
+      "already_configured": "This community or participant is already set up",
+      "reauth_successful": "API key updated"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Surplus signal",
+        "description": "From which certainty on should the surplus sensor switch on? For hard-to-interrupt appliances (washing machine, dishwasher) use likely or certain; for a heating rod or boiler possible is enough.",
+        "data": {
+          "min_certainty": "Minimum certainty"
+        }
+      }
+    }
+  },
+  "selector": {
+    "min_certainty": {
+      "options": {
+        "possible": "Possible",
+        "likely": "Likely",
+        "certain": "Certain"
+      }
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "surplus": {
+        "name": "Community surplus"
+      }
+    },
+    "sensor": {
+      "level": {
+        "name": "Traffic light",
+        "state": {
+          "surplus": "Surplus",
+          "balanced": "Balanced",
+          "deficit": "Deficit",
+          "unavailable": "No reliable value",
+          "expired": "Outdated"
+        }
+      },
+      "certainty": {
+        "name": "Certainty",
+        "state": {
+          "none": "None",
+          "possible": "Possible",
+          "likely": "Likely",
+          "certain": "Certain"
+        }
+      },
+      "balance": {
+        "name": "Community balance",
+        "state_attributes": {
+          "forecast": {
+            "name": "Forecast"
+          }
+        }
+      },
+      "recommended_max": {
+        "name": "Recommended additional power"
+      },
+      "production": {
+        "name": "Community production"
+      },
+      "consumption": {
+        "name": "Community consumption"
+      },
+      "coverage": {
+        "name": "Community coverage"
+      },
+      "surplus_remaining_today": {
+        "name": "Surplus remaining today"
+      },
+      "next_window_start": {
+        "name": "Next surplus window start"
+      },
+      "next_window_end": {
+        "name": "Next surplus window end"
+      },
+      "next_window_energy": {
+        "name": "Next surplus window energy"
+      },
+      "generated_at": {
+        "name": "Forecast generated"
+      },
+      "expires_at": {
+        "name": "Signal valid until"
+      }
+    }
+  },
+  "exceptions": {
+    "rate_limited": {
+      "message": "WiEnergy API rate limit reached, retrying later"
+    },
+    "update_failed": {
+      "message": "Error fetching WiEnergy data: {error}"
+    }
+  }
+}

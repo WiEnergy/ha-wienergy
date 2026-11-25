@@ -1,0 +1,139 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "WiEnergy",
+        "description": "Überschussprognose der WiEnergy-Energiegemeinschaften. API-Key leer lassen, um das öffentliche Signal der Gemeinschaft zu nutzen. Mit einem persönlichen API-Key kommt zusätzlich euer individuelles Budget (recommendedMaxW) dazu.",
+        "data": {
+          "api_key": "API-Key (optional)"
+        },
+        "data_description": {
+          "api_key": "Nur für Teilnehmer mit persönlichem Key von WiEnergy."
+        }
+      },
+      "community": {
+        "title": "Gemeinschaft wählen",
+        "data": {
+          "community_id": "Energiegemeinschaft"
+        }
+      },
+      "participant": {
+        "title": "Teilnehmer wählen",
+        "data": {
+          "participant_id": "Teilnehmer"
+        }
+      },
+      "reauth_confirm": {
+        "title": "API-Key abgelehnt",
+        "description": "Neuen API-Key eingeben.",
+        "data": {
+          "api_key": "API-Key"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "Ungültiger API-Key",
+      "cannot_connect": "Keine Verbindung zur WiEnergy-API",
+      "no_participants": "Diesem API-Key ist kein Teilnehmer zugeordnet",
+      "wrong_participant": "Dieser API-Key gehört zu einem anderen Teilnehmer"
+    },
+    "abort": {
+      "already_configured": "Diese Gemeinschaft bzw. dieser Teilnehmer ist bereits eingerichtet",
+      "reauth_successful": "API-Key aktualisiert"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Überschuss-Signal",
+        "description": "Ab welcher Sicherheit soll der Überschuss-Sensor einschalten? Für schwer abbrechbare Geräte (Wäsche, Geschirr) wahrscheinlich oder sicher, für Heizstab oder Boiler reicht möglich.",
+        "data": {
+          "min_certainty": "Mindest-Sicherheit"
+        }
+      }
+    }
+  },
+  "selector": {
+    "min_certainty": {
+      "options": {
+        "possible": "Möglich",
+        "likely": "Wahrscheinlich",
+        "certain": "Sicher"
+      }
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "surplus": {
+        "name": "Gemeinschaftsüberschuss"
+      }
+    },
+    "sensor": {
+      "level": {
+        "name": "Ampel",
+        "state": {
+          "surplus": "Überschuss",
+          "balanced": "Ausgeglichen",
+          "deficit": "Defizit",
+          "unavailable": "Keine verlässliche Aussage",
+          "expired": "Veraltet"
+        }
+      },
+      "certainty": {
+        "name": "Sicherheit",
+        "state": {
+          "none": "Keiner",
+          "possible": "Möglich",
+          "likely": "Wahrscheinlich",
+          "certain": "Sicher"
+        }
+      },
+      "balance": {
+        "name": "Bilanz Gemeinschaft",
+        "state_attributes": {
+          "forecast": {
+            "name": "Prognose"
+          }
+        }
+      },
+      "recommended_max": {
+        "name": "Empfohlene Zusatzleistung"
+      },
+      "production": {
+        "name": "Erzeugung Gemeinschaft"
+      },
+      "consumption": {
+        "name": "Verbrauch Gemeinschaft"
+      },
+      "coverage": {
+        "name": "Deckungsgrad Gemeinschaft"
+      },
+      "surplus_remaining_today": {
+        "name": "Überschuss heute noch"
+      },
+      "next_window_start": {
+        "name": "Nächstes Fenster Beginn"
+      },
+      "next_window_end": {
+        "name": "Nächstes Fenster Ende"
+      },
+      "next_window_energy": {
+        "name": "Nächstes Fenster Energie"
+      },
+      "generated_at": {
+        "name": "Prognose erstellt"
+      },
+      "expires_at": {
+        "name": "Signal gültig bis"
+      }
+    }
+  },
+  "exceptions": {
+    "rate_limited": {
+      "message": "Abruflimit der WiEnergy-API erreicht, neuer Versuch später"
+    },
+    "update_failed": {
+      "message": "Fehler beim Abruf der WiEnergy-Daten: {error}"
+    }
+  }
+}

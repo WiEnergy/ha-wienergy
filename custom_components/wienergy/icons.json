@@ -1,0 +1,34 @@
+{
+  "entity": {
+    "binary_sensor": {
+      "surplus": {
+        "default": "mdi:solar-power-variant-outline",
+        "state": { "on": "mdi:solar-power-variant" }
+      }
+    },
+    "sensor": {
+      "level": {
+        "default": "mdi:traffic-light",
+        "state": {
+          "surplus": "mdi:white-balance-sunny",
+          "balanced": "mdi:scale-balance",
+          "deficit": "mdi:transmission-tower-import",
+          "unavailable": "mdi:help-circle-outline",
+          "expired": "mdi:clock-alert-outline"
+        }
+      },
+      "certainty": { "default": "mdi:check-decagram-outline" },
+      "balance": { "default": "mdi:home-group" },
+      "recommended_max": { "default": "mdi:gauge" },
+      "production": { "default": "mdi:solar-panel" },
+      "consumption": { "default": "mdi:home-lightning-bolt-outline" },
+      "coverage": { "default": "mdi:percent-circle-outline" },
+      "surplus_remaining_today": { "default": "mdi:battery-arrow-up-outline" },
+      "next_window_start": { "default": "mdi:clock-start" },
+      "next_window_end": { "default": "mdi:clock-end" },
+      "next_window_energy": { "default": "mdi:lightning-bolt-circle" },
+      "generated_at": { "default": "mdi:update" },
+      "expires_at": { "default": "mdi:timer-sand" }
+    }
+  }
+}
