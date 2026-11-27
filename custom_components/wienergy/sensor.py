@@ -6,7 +6,6 @@ from collections.abc import Callable
 from dataclasses import dataclass
 from datetime import datetime, tzinfo
 from typing import Any
-from zoneinfo import ZoneInfo
 
 from homeassistant.components.sensor import (
     SensorDeviceClass,
@@ -208,8 +207,14 @@ async def async_setup_entry(
 ) -> None:
     """Set up WiEnergy sensors."""
     coordinator = entry.runtime_data
+    tz_name = coordinator.data.community.get("timezone") or "Europe/Vienna"
+    tz = (
+        await dt_util.async_get_time_zone(tz_name)
+        or await dt_util.async_get_time_zone("Europe/Vienna")
+        or dt_util.get_default_time_zone()
+    )
     async_add_entities(
-        WiEnergySensor(coordinator, description)
+        WiEnergySensor(coordinator, description, tz)
         for description in SENSORS
         if not description.participant_only or coordinator.participant_id
     )
@@ -223,15 +228,14 @@ class WiEnergySensor(WiEnergyEntity, SensorEntity):
     _unrecorded_attributes = frozenset({"forecast", "windows"})
 
     def __init__(
-        self, coordinator: WiEnergyCoordinator, description: WiEnergySensorDescription
+        self,
+        coordinator: WiEnergyCoordinator,
+        description: WiEnergySensorDescription,
+        tz: tzinfo,
     ) -> None:
         super().__init__(coordinator, description.key)
         self.entity_description = description
-        tz_name = coordinator.data.community.get("timezone") or "Europe/Vienna"
-        try:
-            self._tz: tzinfo = ZoneInfo(tz_name)
-        except (KeyError, ValueError):
-            self._tz = dt_util.get_default_time_zone()
+        self._tz = tz
 
     @property
     def native_value(self) -> Any:
